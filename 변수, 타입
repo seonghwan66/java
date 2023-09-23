@@ -1,0 +1,54 @@
+public class world{
+    public static void main(String[] args){
+        int var1 = 1;
+        int var2 = 206;
+        int var3 = 3;
+        int var4 = 0b1011;
+        long var5 = 10;
+        long var6 = 300000000000000000L;
+        char var = 'a';
+        char var7 = '가';
+        char var8 = '각';
+        int var9 = 'A';
+        String name = "홍길동";
+        String str = "나는 \"자바\"를 좋아합니다.";
+        String str2 = "번호\t이름\t나이";
+        String str3 = "톰과\n제리";
+        String str4 = "톰과\r제리";
+        float foa = 3.14f;
+        double foa2 = 3.14;
+        float foa3 = 0.1234567890123456789f;
+        double foa4 = 0.1234567890123456789;
+        double foa5 = 3e6; // 자바에선 실수 리터럴을 기본적으로 double 타입으로  해석함.
+        float foa6 = 3e6F; // f나 F나 상관 없음.
+
+        System.out.println("var2 : " + var2);
+        System.out.println("var1 : " + var1);
+        System.out.println("var3 ; " + var3);
+        System.out.println("var4 ; " + var4);
+        System.out.println("var5 ; " + var5);
+        System.out.println("var6 ; " + var6);
+        System.out.println("var7 ; " + var7);
+        System.out.println("var8 ; " + var8);
+        System.out.println("var9 ; " + var9);
+        System.out.println(name);
+        System.out.println(str);
+        System.out.println(str2);
+        System.out.println(str3);
+        System.out.println(str4);
+        System.out.println(foa);
+        System.out.println(foa2);
+        System.out.println(foa3);
+        System.out.println(foa4);
+        System.out.println(foa5);
+        System.out.println(foa6);
+
+        boolean stop = true;
+        if (stop){
+            System.out.println("중지합니다.");
+        }
+        else{
+            System.out.println("시작합니다.");
+        }
+    }
+}
