@@ -52,3 +52,54 @@ public class world{
         }
     }
 }
+
+---------------------------------------------------------타입 변환---------------------------------------------------------
+public class world{
+    public static void main(String[] args){
+
+        // 자동 타입 변환
+        byte byteValue = 10;
+        int intValue = byteValue;
+        System.out.println("intValue : " + intValue);
+
+        char charValue = 'A';
+        intValue = charValue;
+        System.out.println("A unicode : " + intValue);
+
+        long longValue = 100;
+        float floatValue = longValue;
+        System.out.println("floatValue : " + floatValue);
+
+        // 강제 타입 변환
+        int value = 33045;
+        char chvalue = (char) value;
+        System.out.println(chvalue);
+
+        double dovalue = 3.14;
+        value = (int) dovalue;
+        System.out.println(value);
+
+        // 정수 타입의 연산에서의 자동 타입 변환
+        byte value1 = 10;
+        int value2 = 100;
+        long value3 = 1000;
+        long result = value1 + value2 + value3;
+        System.out.println(result);
+
+        // 실수 타입의 연산에서의 자동 타입 변환
+        int inValue = 10;
+        double doubleValue = 5.5;
+        double result1 = inValue + doubleValue; // float type을 사용하려면 뒤에 f나 F를 붙여야함.
+        System.out.println(result1);
+
+        int x = 1;
+        int y = 2;
+        int intResult = x / y;
+        System.out.println(intResult);
+
+        int a = 1;
+        int b = 2;
+        double doResult = (double) a/b;
+        System.out.println(doResult);
+    }
+}
