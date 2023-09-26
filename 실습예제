@@ -1,0 +1,26 @@
+실습 예제 1
+
+world.java
+public class world{
+    public static void main(String[] args){
+        TV myTV = new TV("LG", 2023, 55);
+        myTV.show();
+    }
+}
+
+TV.java
+public class TV {
+    private String name;
+    private int a;
+    private int b;
+    public TV(String name, int a, int b){
+        this.name=name;
+        this.a=a;
+        this.b=b;
+    }
+
+    public void show(){
+        System.out.println(name + "에서 만든 " + a + "년형" + b + "인치 TV");
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------
