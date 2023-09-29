@@ -55,3 +55,60 @@ public class hi{
         }
     }
 }
+
+
+
+
+public class hi{
+    public static void main(String[] args){
+        int sum = 0;
+        for(int i =1; i<=100; i++){
+            sum = sum + i;
+        }
+        System.out.println("1~100의 합 : " + sum);
+
+        int a = 0;
+        int sum2 = 0;
+
+        for(a = 1; a <= 100; a++){
+            sum2 += a;
+        }
+        System.out.println("1~" + (a-1) + "의 합 : " + sum2);
+
+        // for문 작성 시 초기화식 float 타입 사용 금지. why? float 타입은 정확하게 표현할 수 없기 때문.
+
+        for(int m = 2; m <=5; m++){
+            System.out.println(m + "단");
+            for(int n = 1; n <=3; n++){
+                System.out.println(m + "x" + n + "=" + (m*n));
+            }
+        }
+
+        Outter: for(char up = 'A'; up <='Z'; up++){
+            for(char low = 'a'; low <= 'z'; low++){
+                System.out.println(up + "-" + low);
+                if(low == 'g'){
+                    break Outter;   // break;만 쓰면 소문자 for문만 종료, break Outter; 쓰면 바깥쪽 for문까지 종료함.
+                }
+            }
+        }
+        System.out.println("프로그램 실행 종료");
+
+        // 짝수만 출력
+        for(int p = 1; p <= 10; p++){
+            if(p%2 != 0){
+                continue;
+            }
+            System.out.println(p);
+        }
+
+        // 3의 배수 총합
+        int ss = 0;
+        for(int aa = 1; aa <=100; aa++){
+            if(aa % 3 == 0){
+                ss += aa;
+            }
+        }
+        System.out.println("3의 배수 총합 : " + ss);
+    }
+}
