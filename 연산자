@@ -85,7 +85,7 @@ public class hi{
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("아이디 : ");
-        String name = scanner.nextLine();
+        String name = scanner.nextLine();  // nextInt()는 정수 입력, nextLine()은 문자열 입력, nextDouble()은 실수 입력 등 데이터 형식에 맞게 next 메서드를 사용해야함.
 
         System.out.print("비밀번호 : ");
         String strPassword = scanner.nextLine();
