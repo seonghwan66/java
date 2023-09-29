@@ -21,3 +21,58 @@ public class hi {
         System.out.println("3. 전화번호 : " + tel);
     }
 }
+
+
+
+import java.util.Scanner;
+
+public class hi{
+    public static void main(String[] args){
+        byte a = 100;
+        byte b = 30;
+        int result = a + b;
+        System.out.println(result);
+
+        boolean play = true;
+        System.out.println(play);
+
+        play = !play;
+        System.out.println(play);
+
+        play = !play;
+        System.out.println(play);
+
+        double v1 = 0.1;
+        float v2 = 0.2f;
+        System.out.println(v1==v2);
+        System.out.println((float)v1==v2);
+
+        int score = 100;
+        char grade = (score > 90) ? 'A' : 'B';
+        System.out.println(score + "점은" + grade + "등급입니다.");
+
+        int x = 10;
+        int y = 20;
+        int z = (++x) + (--y);
+        System.out.println(z);
+
+        int value = 356;
+        System.out.println(value / 100 * 100);
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("첫 번째 수 : ");
+        double num1 = Double.parseDouble(scanner.nextLine());
+
+        System.out.println("두 번째 수 : ");
+        double num2 = Double.parseDouble(scanner.nextLine());
+
+        System.out.println("------------------");
+        if(num2 != 0.0){
+            System.out.println("결과 : " + (num1/num2));
+        }
+        else{
+            System.out.println("결과 : 무한대");
+        }
+    }
+}
