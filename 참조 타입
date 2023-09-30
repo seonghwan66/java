@@ -32,3 +32,4 @@ public class hi{
 //str1과 str2는 문자열이 같음
 //str3와 str4는 참조가 다름
 //str3와 str4는 문자열 같음.
+//만약 null인 참조 변수를 통해 있지도 않은 객체의 필드나 메드를 사용하면 NullPointerException이 발생함.
