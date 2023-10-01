@@ -190,3 +190,40 @@ public class hi{
         System.out.println("프로그램 종료");
     }
 }
+-------------------------------Week.java-------------------------------
+public enum Week {
+    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATRUDAY, SUNDAY
+}
+-------------------------------today.java-------------------------------
+import java.util.Calendar;
+public class today {
+    public static void main(String[] args){
+        Week today = null;
+
+        Calendar cal = Calendar.getInstance();
+        int week = cal.get(Calendar.DAY_OF_WEEK);
+
+        switch (week){
+            case 1:
+                today = Week.SUNDAY; break;
+            case 2:
+                today = Week.MONDAY; break;
+            case 3:
+                today = Week.TUESDAY; break;
+            case 4:
+                today = Week.WEDNESDAY; break;
+            case 5:
+                today = Week.THURSDAY; break;
+            case 6:
+                today = Week.FRIDAY; break;
+            case 7:
+                today = Week.SATRUDAY; break;
+        }
+        if(today==Week.SUNDAY){
+            System.out.println("일요일엔 축구지 ㅋ ");
+        }
+        else{
+            System.out.println("java 공부해야지...");
+        }
+    }
+}
