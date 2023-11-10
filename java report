@@ -94,3 +94,78 @@ class Day {
         else System.out.println(work + "입니다.");
     }
 }
+----------------------------------------------------------------------------------------------------------------------------------
+import java.util.Scanner;
+
+public class CallerExample {
+    public static void main(String[] args){
+        Callee callee = new Callee();
+
+        Callee.CallBack callBack = new Callee.CallBack() {
+            @Override
+            public void onInputOne(Callee callee) {
+                System.out.println("Caller : Input from Calle " + callee.getNum());
+                System.out.println("callee's num : " + callee.getNum());
+            }
+
+            @Override
+            public void onInputTwo(Callee callee) {
+                System.out.println("Caller : Input from Calle " + callee.getNum());
+                System.out.println("callee's num : " + callee.getNum());
+            }
+        };
+
+        callee.setCallBack(callBack);
+        callee.execute();
+    }
+}
+
+class Callee{
+    public interface CallBack{
+        public void onInputOne(Callee callee);
+        public void onInputTwo(Callee callee);
+    }
+    private Integer num;
+    private CallBack callback;
+
+    public Callee(){
+        this.num = 0;
+        this.callback = null;
+    }
+
+    public void setCallBack(CallBack callback){
+        this.callback = callback;
+    }
+
+    public Integer getNum(){
+        return this.num;
+    }
+
+    /*public void execute(){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("1과 2 중 하나를 입력하세요.");
+        num = sc.nextInt();
+        if(num != 1 && num !=2){
+            System.out.println("1과 2 중 하나를 입력하세요.");
+        }
+
+        if(this.num != null){
+
+        }
+    }*/
+    public void execute() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("1과 2 중 하나를 입력하세요.");
+        num = sc.nextInt();
+
+        if (callback != null) {
+            if (num == 1) {
+                callback.onInputOne(this);
+            } else if (num == 2) {
+                callback.onInputTwo(this);
+            }
+        }
+    }
+}
