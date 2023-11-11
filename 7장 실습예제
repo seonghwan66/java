@@ -240,7 +240,7 @@ class Dog extends Animalmal{
         System.out.println("멍멍!");
     }
 }
-class MyPet extends Animalmal{}
+class MyPet extends Animalmal{} //class MyPet extends Cat, Dog {}
 public class Polymorphism {
     public static void main(String[] args){
         MyPet p = new MyPet();
