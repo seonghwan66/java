@@ -26,3 +26,21 @@ public class TestInterface {
     }
 }
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+interface Drawable{
+    void draw();
+    public default void getSize(){
+        System.out.println("10203X748");
+    }
+}
+class CircleDraw implements Drawable{
+    int radius;
+    public void draw(){System.out.println("Circle Draw");}
+    public void getSize(){System.out.println("30555X492");}
+}
+public class TestClass{
+    public static void main(String[] args){
+        Drawable d = new CircleDraw();
+        d.draw();
+        d.getSize();
+    }
+}
