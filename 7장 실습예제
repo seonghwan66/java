@@ -146,7 +146,45 @@ public class Zookeeper{
         zookeeper.feed(croc);
     }
 }
----------------------------------------------실습예제1---------------------------------------------
+--------------------------------------------- 실습예제 2-2 ---------------------------------------------
+interface Bird{
+    void walk();
+    void fly();
+    void calling();
+}
+class Eagle implements Bird{
+    public void walk(){
+        System.out.println("독수리는 걸을 수 있음.");
+    }
+    public void fly(){
+        System.out.println("독수리는 높게 날 수 있음.");
+    }
+    public void calling(){
+        System.out.println("독수리는 울 수 있음.");}
+}
+class Crow implements Bird{
+    public void walk(){
+        System.out.println("까마귀는 걸을 수 있음.");
+    }
+    public void fly(){
+        System.out.println("까마귀는 높게 날 수 있음.");
+    }
+    public void calling(){
+        System.out.println("까마귀는 울 수 있음.");}
+}
+public class Fly {
+    public static void main(String[] args){
+        Eagle eagle = new Eagle();
+        Crow crow = new Crow();
+
+        eagle.walk();
+        eagle.fly();
+        eagle.calling();
+        crow.walk();
+        crow.fly();
+        crow.calling();
+    }
+}
 
 ---------------------------------------------실습예제1---------------------------------------------
 
