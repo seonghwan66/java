@@ -224,8 +224,29 @@ public class FactoryMain {
         System.out.println(bobo.getName());
     }
 }
----------------------------------------------실습예제1---------------------------------------------
-
+--------------------------------------------- 실습예제 4 ---------------------------------------------
+class Animalmal{
+    public void cry(){
+        System.out.println("짖기!");
+    }
+}
+class Cat extends Animalmal{
+    public void cry(){
+        System.out.println("냐옹냐옹!");
+    }
+}
+class Dog extends Animalmal{
+    public void cry(){
+        System.out.println("멍멍!");
+    }
+}
+class MyPet extends Animalmal{}
+public class Polymorphism {
+    public static void main(String[] args){
+        MyPet p = new MyPet();
+        p.cry();
+    }
+}
 ---------------------------------------------실습예제1---------------------------------------------
 
 ---------------------------------------------실습예제1---------------------------------------------
