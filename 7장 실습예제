@@ -1,4 +1,4 @@
----------------------------------------------실습예제1---------------------------------------------
+--------------------------------------------- 실습예제 1 ---------------------------------------------
 abstract class Unit{
     int x;
     int y;
@@ -90,8 +90,62 @@ public class UnitEx {
         dp.stop("드랍쉽", 200, 100);
     }
 }
----------------------------------------------실습예제1---------------------------------------------
+--------------------------------------------- 실습예제 2-1 ---------------------------------------------
+interface Predator{
+    public String likeFood();
+}
+abstract class Animal{
+    String name;
+    public abstract void setName(String name);
+}
+class Tiger extends Animal implements Predator{
+    public void setName(String name){
+        this.name=name;
+    }
+    public String likeFood(){
+        return "apple";
+    }
+}
+class Lion extends Animal implements Predator{
+    public void setName(String name){
+        this.name=name;
+    }
+    public String likeFood(){
+        return "banana";
+    }
+}
+class Crocodile extends Animal implements Predator{
+    public void setName(String name){
+        this.name=name;
+    }
+    public String likeFood(){
+        return "gogi";
+    }
+}
+public class Zookeeper{
+    /*
+    public void feed(Tiger tiger) {
+        System.out.println("feed apple");
+    }
+    public void feed(Lion lion) {
+        System.out.println("feed banana");
+    }
+     */
+    public void feed(Predator predator){
+        System.out.println("feed " + predator.likeFood());
+    }
+    public static void main(String[] args) {
+        Zookeeper zookeeper = new Zookeeper();
+        
+        Tiger tiger = new Tiger();
+        Lion lion = new Lion();
+        Crocodile croc = new Crocodile();
 
+        zookeeper.feed(tiger);
+        zookeeper.feed(lion);
+        zookeeper.feed(croc);
+    }
+}
 ---------------------------------------------실습예제1---------------------------------------------
 
 ---------------------------------------------실습예제1---------------------------------------------
