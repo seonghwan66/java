@@ -1,0 +1,91 @@
+import java.io.*;
+import java.util.Arrays;
+public class HashCommandProcessor {
+    static Integer[] hash_file = new Integer[32];
+    public static void main(String[] args) {
+        Arrays.fill(hash_file, -1);
+        try (
+                InputStream inputStream = HashCommandProcessor.class.getResourceAsStream("hash_cmd.txt");
+                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+                BufferedWriter bw = new BufferedWriter(new FileWriter("result.txt"))
+        ) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] command = line.split(" ");
+
+                if (command[0].equals("i")) {
+                    int key = Integer.parseInt(command[1]);
+                    checkKey(key);
+                } else if (command[0].equals("r")) {
+                    int key = Integer.parseInt(command[1]);
+                    removeKey(key);
+                }
+            }
+            printKey(bw);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    static void printKey(BufferedWriter bw) throws IOException {
+        for (int i = 0; i < 16; i++) {
+            bw.write(i + ":");
+            Node current = new Node(hash_file[i]);
+            while( current.next != null){
+                bw.write(current.value + ",");
+                current = current.next;
+            }
+            bw.write(current.value + ",");
+            bw.newLine();
+        }
+    }
+    static void checkKey(int key) {
+        int hash = key % 16;
+        Node current = new Node(hash_file[hash]);
+        while (current != null) {
+            if (current.value == key) { return; }
+            current = current.next;
+        }
+        insertKey(hash, key);
+    }
+    static void insertKey(int hash, int key){
+        Node current = new Node(hash_file[hash]);
+        if (hash_file[hash] == -1) {
+            hash_file[hash] = key;
+            current.value = key;
+        } else {
+            for (int i = 16; i < 32; i++) {
+                if (hash_file[i] == -1) {
+                    hash_file[i] = key;
+                    Node newnode = new Node(key);
+                    while (current.next != null) {
+                        current = current.next;
+                    }
+                    current.next = newnode;
+                    return;
+                }
+            }
+        }
+    }
+    static class Node {
+        int value;  Node next;
+        public Node(int value) {
+            this.value = value;
+            this.next = null;
+        }
+    }
+    static void removeKey(int key) {
+        int hash = key % 16;
+        Node current = new Node(hash_file[hash]);
+
+        if (current.value == key) {
+            hash_file[hash] = -1;
+        } else {
+            while (current.next != null) {
+                if (current.next.value == key) {
+                    current.next = null; return;
+                }
+                current = current.next;
+            }
+        }
+    }
+}
