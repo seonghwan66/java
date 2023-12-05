@@ -89,3 +89,136 @@ public class HashCommandProcessor {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import java.io.*;
+public class try1 {
+    public static void main(String[] args) {
+        LinkedList[] hash_file = new LinkedList[16];
+        for (int i = 0; i < 16; i++) {
+            hash_file[i] = new LinkedList();
+        }
+        try (
+                InputStream inputStream = try1.class.getResourceAsStream("hash_cmd.txt");
+                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+                BufferedWriter bw = new BufferedWriter(new FileWriter("result.txt"))
+        ) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] command = line.split(" ");
+                int totalSize = 0;
+                if (command[0].equals("i")) {
+                    int key = Integer.parseInt(command[1]);
+                    for(int i = 0; i < 16; i++){
+                        totalSize += hash_file[i].size;
+                    }
+                    if(totalSize != 32){
+                        hash_file[key % 16].insertKey(key);
+                    }
+                } else if (command[0].equals("r")) {
+                    int key = Integer.parseInt(command[1]);
+                    hash_file[key % 16].removeKey(key);
+                }
+            }
+            for(int i = 0; i < 16; i++){
+                bw.write(i+": ");
+                bw.write(hash_file[i].toString());
+                bw.write("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+class LinkedList{
+    private Node head;
+    private Node tail;
+    public int size = 0;
+    public class Node{
+        public Object data;
+        public Node next;
+        public Node(Object input){
+            this.data = input;
+            this.next = null;
+        }
+    }
+    public void insertKey(int key){
+        Node current = head;
+        while (current != null) {
+            if (current.data.equals(key)) { return; }
+            current = current.next;
+        }
+        if( head == null){
+            head = new Node(key);
+            size++;
+            if(head.next == null){
+                tail = head;
+            }
+        } else {
+            Node newNode = new Node(key);
+            tail.next = newNode;
+            tail = newNode;
+            size++;
+        }
+    }
+    public String toString(){
+        StringBuilder str = new StringBuilder();
+        if(head == null){
+            return "-1,";
+        }
+        Node current = head;
+        for(int i = 0; i<size; i++){
+            str.append(current.data).append(", ");
+            current = current.next;
+        }
+        return str + "";
+    }
+    public void removeKey(int key) {
+        Node current = head;
+        Node prev = null;
+        // 헤드 노드가 제거 대상인 경우
+        while (current != null && current.data.equals(key)) {
+            head = current.next;
+            current = head;
+            size--;
+        }
+        // 중간 또는 끝에 위치한 노드를 찾아 제거
+        while (current != null) {
+            while (current != null && !current.data.equals(key)) {
+                prev = current;
+                current = current.next;
+            }
+            // 제거 대상 노드가 존재하는 경우
+            if (current != null) {
+                prev.next = current.next;
+                size--;
+
+                // 테일 노드가 제거 대상인 경우 tail 업데이트
+                if (current == tail) {
+                    tail = prev;
+                }
+                current = prev.next; // current를 다음 노드로 옮기기
+            }
+        }
+    }
+
+}
