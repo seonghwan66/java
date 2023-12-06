@@ -101,7 +101,6 @@ class LinkedList {
         }
         return str + "";
     }
-
     public void removeKey(int key) {
         Node current = head;
         Node prev = null;
@@ -118,7 +117,6 @@ class LinkedList {
             if (current != null) {
                 prev.next = current.next;
                 size--;
-
                 if (current == tail) {
                     tail = prev;
                 }
