@@ -3,28 +3,40 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 public class synonym_chain {
     public static void main(String[] args) {
         LinkedList[] hash_file = new LinkedList[16];
         for (int i = 0; i < 16; i++) {
             hash_file[i] = new LinkedList();
         }
-
         try (BufferedReader br = new BufferedReader(new FileReader("hash_cmd.txt"));
              BufferedWriter bw = new BufferedWriter(new FileWriter("result.txt"))
         ) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] command = line.split(" ");
-                int totalSize = 0;
                 if (command[0].equals("i")) {
                     int key = Integer.parseInt(command[1]);
+                    int totalSize = 0;
+                    int overflowSize = 0;
                     for (int i = 0; i < 16; i++) {
                         totalSize += hash_file[i].size;
                     }
-                    if (totalSize != 32) {
-                        hash_file[key % 16].insertKey(key);
+                    for(int i = 0; i < 16; i++){
+                        LinkedList.Node current = hash_file[i].head;
+                        while( current != null ){
+                            if(current != hash_file[i].head){
+                                overflowSize++;
+                            }
+                            current = current.next;
+                        }
+                    }
+                    if (totalSize != 32) { // 31까지 동작.
+                        if( hash_file[key % 16].head == null ){ // 일반 구역.
+                            hash_file[key % 16].insertKey(key);
+                        } else if( overflowSize != 16 ){ // 오보플로우 구역 15까지 동작.
+                            hash_file[key % 16].insertKey(key);
+                        }
                     }
                 } else if (command[0].equals("r")) {
                     int key = Integer.parseInt(command[1]);
@@ -43,8 +55,8 @@ public class synonym_chain {
 }
 
 class LinkedList {
-    private Node head;
-    private Node tail;
+    public Node head;
+    public Node tail;
     public int size = 0;
 
     public class Node {
