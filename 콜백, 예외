@@ -1,0 +1,177 @@
+//피호출 함수
+import java.util.Scanner;
+
+public class Callee {
+ 
+    public interface CallBack {
+        public void onInputOne(Callee callee);
+        public void onInputTwo(Callee callee);
+    }
+ 
+    private Integer num;
+    private CallBack callback;
+ 
+    public Callee() {
+        this.num = 0;
+        this.callback = null;
+    }
+ 
+    public void setCallBack(CallBack callback) {
+        this.callback = callback;
+    }
+ 
+    public Integer getNum() {
+        return this.num;
+    }
+ 
+    public void execute() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("1과 2중 하나를 입력하세요.");
+        this.num = scanner.nextInt();
+ 
+        if(this.callback != null) {
+            switch(this.num) {
+                case 1:
+                    this.callback.onInputOne(Callee.this);
+                    break;
+                case 2:
+                    this.callback.onInputTwo(Callee.this);
+                    break;
+            }
+        }
+    } 
+}
+
+
+//호출 함수
+public class CallerExample {
+	 
+    public static void main(String[] args) {
+        Callee callee = new Callee();
+        callee.setCallBack(new Callee.CallBack() {
+            @Override
+            public void onInputOne(Callee callee) {
+                System.out.println("Caller : Input from Callee 1");
+                System.out.println("callee's num : " + callee.getNum());
+            }
+            @Override
+            public void onInputTwo(Callee callee) {
+                System.out.println("Caller : Input from Callee 2");
+                System.out.println("callee's num : " + callee.getNum());
+            }
+        });
+ 
+        callee.execute();
+    }
+}
+
+
+
+//8장 실습 1
+package yangmincorp;
+
+public class Calculator {
+    public int mul(int a, int b) {
+        return a * b;
+    }
+}
+
+
+package samsung;//삼성 패키지 선언
+
+public class Calculator {
+    public int div(int a, int b) {
+        return a / b;
+    }
+}
+
+
+package naver;//네이버 패키지 선언
+
+public class Calculator {
+    public int add(int a, int b) {
+        return a + b;
+    }
+}
+
+
+package google; //구글 패키지 선언
+
+public class Calculator {
+    public int sub(int a, int b) {
+        return a - b;
+    }
+}
+
+
+import yangmincorp.Calculator;
+package test;
+
+public class CalcTest {
+
+    public static void main(String[] args) {
+        
+        samsung.Calculator calculator1 = new samsung.Calculator();
+        naver.Calculator calculator2 = new naver.Calculator();
+        google.Calculator calculator3 = new google.Calculator();
+        Calculator calculator4 = new Calculator();
+
+        System.out.println(calculator4.mul(12, 5));
+        // 이하 생략
+     
+    }
+}
+
+//8장 실습 2
+import java.util.Scanner;
+
+class eThrow1 {
+	public void ethrow1(String a, String b) throws NumberFormatException 
+	{		
+		int sum = Integer.parseInt(a) + Integer.parseInt(b); 
+		System.out.println("문자로 입력받은 " +a+ "," +b+ "의 합은 " + sum + "입니다."); 
+	}
+}
+
+class eThrow2 {
+	public void ethrow2(String a, String b) throws NumberFormatException, ArithmeticException 
+	{
+		int result = Integer.parseInt(a) / Integer.parseInt(b); 
+		System.out.println("문자로 입력받은 " +a+ "," +b+ "의 나누기는 " + result + "입니다."); 		
+	}
+	
+}
+
+public class MainTest {
+	public static void main(String[] args) {
+		String a, b, c, d;
+		
+		eThrow1 e1 = new eThrow1();
+		eThrow2 e2 = new eThrow2();
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.print("첫 번째 숫자를 입력하세요.");
+		a = sc.next();
+		System.out.print("두 번째 숫자를 입력하세요.");
+		b = sc.next();
+		
+		System.out.print("세 번째 숫자를 입력하세요.");
+		c = sc.next();
+		System.out.print("세 번째 숫자를 입력하세요.");
+		d = sc.next();	
+		
+		try 
+		{		
+			e1.ethrow1(a, b);
+			e2.ethrow2(c, d);
+		}
+		catch(NumberFormatException e){
+			System.out.println(e.getClass());
+			System.out.println(e.getMessage());
+		}
+		catch(ArithmeticException e) {
+			System.out.println(e.getClass());
+			System.out.println(e.getMessage());
+		}
+	}
+}
