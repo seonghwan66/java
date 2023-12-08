@@ -403,10 +403,9 @@ public class MyFrame extends JFrame {
 }
 
 
---------------------------------------------- 10장 실습예제3 ---------------------------------------------
+--------------------------------------------- 10장 실습예제4 ---------------------------------------------
 //10장 실습 3
 package slotmachine;
-
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -417,59 +416,60 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-// 소스를 입력하고 Ctrl+Shift+O를 눌러서 필요한 파일을 포함한다. 
-
+// 슬롯머신 게임을 구현한 MyCounter 클래스 정의
 class MyCounter extends JFrame implements ActionListener {
-   private JLabel[] labels;
-   private JButton button;
-   private int[] numbers;
+    private JLabel[] labels;   // 레이블 배열
+    private JButton button;     // 버튼 객체
+    private int[] numbers;      // 숫자 배열
 
-   public MyCounter() {
-      setSize(500, 300);
-      JPanel panel = new JPanel();
-      panel.setLayout(null);
+    // MyCounter 클래스의 생성자
+    public MyCounter() {
+        setSize(500, 300);     // 프레임 크기 설정
+        JPanel panel = new JPanel();   // 패널 생성
+        panel.setLayout(null);        // 배치 관리자 설정
 
-      labels = new JLabel[3];
+        labels = new JLabel[3];      // 3개의 레이블 생성
+        numbers = new int[3];        // 3개의 숫자 배열 생성
 
-      numbers = new int[3];
+        // 각 레이블 초기화 및 패널에 추가
+        for (int i = 0; i < 3; i++) {
+            labels[i] = new JLabel("" + numbers[i]); // 초기값은 0
+            labels[i].setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 100)); // 폰트 설정
+            labels[i].setSize(100, 100);    // 크기 설정
+            labels[i].setLocation(100 + 100 * i, 20);  // 위치 설정
+            panel.add(labels[i]);    // 패널에 레이블 추가
+        }
 
-      for (int i = 0; i < 3; i++) {
-         labels[i] = new JLabel("" + numbers[i]);
-         labels[i].setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 100));
-         labels[i].setSize(100, 100);
-         labels[i].setLocation(100 + 100 * i, 20);
-         panel.add(labels[i]);
-      }
+        button = new JButton("스핀");   // "스핀"이 적힌 버튼 생성
+        button.setSize(300, 30);        // 크기 설정
+        button.setLocation(100, 120);   // 위치 설정
+        panel.add(button);              // 패널에 버튼 추가
+        button.addActionListener(this); // 버튼에 ActionListener 등록
 
-      button = new JButton("스핀");
-      button.setSize(300, 30);
-      button.setLocation(100, 120);
-      panel.add(button);
-      button.addActionListener(this);
+        add(panel);          // 프레임에 패널 추가
+        setTitle("My Game"); // 프레임 제목 설정
+        setVisible(true);    // 프레임을 화면에 표시
+    }
 
-      add(panel);
-      setTitle("My Game");
-
-
-      setVisible(true);
-   }
-
-   @Override
-   public void actionPerformed(ActionEvent event) {
-      for (int i = 0; i < 3; i++) {
-         numbers[i] = (int) (Math.random() * 10);
-         labels[i].setText("" + numbers[i]);
-      }
-   }
+    // ActionListener의 메서드를 구현한 actionPerformed 메서드
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        // "스핀" 버튼이 클릭되었을 때 호출되는 메서드
+        for (int i = 0; i < 3; i++) {
+            numbers[i] = (int) (Math.random() * 10); // 0부터 9까지의 난수 생성
+            labels[i].setText("" + numbers[i]);      // 레이블에 숫자 표시
+        }
+    }
 }
 
+// 메인 클래스
 public class SlotMachine {
-   public static void main(String[] args) {
-      new MyCounter();
-   }
+    public static void main(String[] args) {
+        new MyCounter(); // MyCounter 객체 생성하여 슬롯머신 게임 시작
+    }
 }
 
-//16장 실습 1
+--------------------------------------------- 16장 실습예제1 ---------------------------------------------
 class MyRunnable implements Runnable {
 
   private static final Random random = new Random();
