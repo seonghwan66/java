@@ -229,74 +229,75 @@ class Callee{
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-public class PanelButtonMovement extends JFrame{
-    int xP, yP, counter = 0;
-    public PanelButtonMovement() {
-        setSize(1000,700);
-        setTitle("Moving Button");
-        setLayout(null);
 
-        JPanel firstPanel = new JPanel();
-        firstPanel.setBackground(Color.YELLOW);
-        firstPanel.setBounds(0, 0, 500, 350);
-        firstPanel.setLayout(null);
+public class MovingButton extends JFrame {
+    int x, y, counter = 0;
 
-        JPanel secondPanel = new JPanel();
-        secondPanel.setBackground(Color.BLACK);
-        secondPanel.setBounds(500, 0, 500, 350);
-        secondPanel.setLayout(null);
+    // MovingButton 클래스 생성자
+    public MovingButton() {
+        setSize(1000, 700);     // 프레임 크기 설정
+        setTitle("Moving Button"); // 프레임 제목 설정
+        setLayout(null);         // 배치 관리자를 사용하지 않도록 설정
 
-        JPanel thirdPanel = new JPanel();
-        thirdPanel.setBackground(Color.GRAY);
-        thirdPanel.setBounds(0, 350, 500, 350);
-        thirdPanel.setLayout(null);
+        // 각 패널 생성 및 설정
+        JPanel TLPanel = createPanel(Color.YELLOW, 0, 0, 500, 350);
+        JPanel TRPanel = createPanel(Color.BLACK, 500, 0, 500, 350);
+        JPanel LLPanel = createPanel(Color.GRAY, 0, 350, 500, 350);
+        JPanel LRPanel = createPanel(Color.YELLOW, 500, 350, 500, 350);
 
-        JPanel fourthPanel = new JPanel();
-        fourthPanel.setBackground(Color.YELLOW);
-        fourthPanel.setBounds(500, 350, 500, 350);
-        fourthPanel.setLayout(null);
-
-        JButton button = new JButton("Start");
-        button.setSize(100,50);
+        // 버튼 생성 및 설정
+        JButton button = new JButton("Moving Button");
+        button.setSize(100, 50);
+        
+        // 버튼에 MouseListener 및 MouseMotionListener 추가
         button.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                xP = e.getX();  yP = e.getY();
-                System.out.println(button.getText());
+                x = e.getX();  // 마우스 클릭 시의 x 좌표 저장
+                y = e.getY();  // 마우스 클릭 시의 y 좌표 저장
+                System.out.println(button.getText()); // 콘솔에 버튼의 텍스트 출력
             }
         });
         button.addMouseMotionListener(new MouseAdapter() {
-            int xPd, yPd= 0;
+            int xx, yy = 0;
+
             public void mouseDragged(MouseEvent e) {
-                xPd = button.getX() + e.getX() - xP;
-                yPd = button.getY() + e.getY() - yP;
-                button.setLocation(xPd, yPd);
-                if(xPd >= 500 && yPd < 350 && xPd < 1000 && yPd >= 0) {
+                xx = button.getX() + e.getX() - x;
+                yy = button.getY() + e.getY() - y;
+
+                // 버튼 위치 설정 및 영역 판별
+                button.setLocation(xx, yy);
+                if (xx >= 500 && yy < 350 && xx < 1000 && yy >= 0) {
                     button.setText("Top Right");
-                }
-                else if(xPd < 500 && yPd >= 350 && xPd >= 0 && yPd < 700) {
+                } else if (xx < 500 && yy >= 350 && xx >= 0 && yy < 700) {
                     button.setText("Low Left");
-                }
-                else if(xPd >= 500 && yPd >= 350 && xPd < 1000 && yPd < 700) {
+                } else if (xx >= 500 && yy >= 350 && xx < 1000 && yy < 700) {
                     button.setText("Low Right");
-                }
-                else if(xPd < 500 && yPd < 350 && xPd >= 0 && yPd >= 0){
+                } else if (xx < 500 && yy < 350 && xx >= 0 && yy >= 0) {
                     button.setText("Top Left");
-                }
-                else {
-                    button.setText("OutOfBounds!");
+                } else {
+                    button.setText("Out Of Bounds");
                 }
             }
         });
         add(button);
-        add(firstPanel);
-        add(secondPanel);
-        add(thirdPanel);
-        add(fourthPanel);
+        add(TLPanel);
+        add(TRPanel);
+        add(LLPanel);
+        add(LRPanel);
 
-        setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);       // 프레임을 화면에 표시
+        setDefaultCloseOperation(EXIT_ON_CLOSE);  // 닫기 버튼 설정
     }
+    // 패널을 생성하고 색상, 위치, 크기를 설정하는 메서드
+    private JPanel createPanel(Color color, int x, int y, int width, int height) {
+        JPanel panel = new JPanel();
+        panel.setBackground(color);
+        panel.setBounds(x, y, width, height);
+        panel.setLayout(null);
+        return panel;
+    }
+    // 메인 메서드
     public static void main(String[] args) {
-        new PanelButtonMovement();
+        new MovingButton(); // MovingButton 객체 생성
     }
 }
