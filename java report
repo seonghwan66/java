@@ -224,3 +224,79 @@ class Callee{
         }
     }
 }
+
+----------------------------------------------------------------------------------------------------------------------------------
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+public class PanelButtonMovement extends JFrame{
+    int xP, yP, counter = 0;
+    public PanelButtonMovement() {
+        setSize(1000,700);
+        setTitle("Moving Button");
+        setLayout(null);
+
+        JPanel firstPanel = new JPanel();
+        firstPanel.setBackground(Color.YELLOW);
+        firstPanel.setBounds(0, 0, 500, 350);
+        firstPanel.setLayout(null);
+
+        JPanel secondPanel = new JPanel();
+        secondPanel.setBackground(Color.BLACK);
+        secondPanel.setBounds(500, 0, 500, 350);
+        secondPanel.setLayout(null);
+
+        JPanel thirdPanel = new JPanel();
+        thirdPanel.setBackground(Color.GRAY);
+        thirdPanel.setBounds(0, 350, 500, 350);
+        thirdPanel.setLayout(null);
+
+        JPanel fourthPanel = new JPanel();
+        fourthPanel.setBackground(Color.YELLOW);
+        fourthPanel.setBounds(500, 350, 500, 350);
+        fourthPanel.setLayout(null);
+
+        JButton button = new JButton("Start");
+        button.setSize(100,50);
+        button.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                xP = e.getX();  yP = e.getY();
+                System.out.println(button.getText());
+            }
+        });
+        button.addMouseMotionListener(new MouseAdapter() {
+            int xPd, yPd= 0;
+            public void mouseDragged(MouseEvent e) {
+                xPd = button.getX() + e.getX() - xP;
+                yPd = button.getY() + e.getY() - yP;
+                button.setLocation(xPd, yPd);
+                if(xPd >= 500 && yPd < 350 && xPd < 1000 && yPd >= 0) {
+                    button.setText("Top Right");
+                }
+                else if(xPd < 500 && yPd >= 350 && xPd >= 0 && yPd < 700) {
+                    button.setText("Low Left");
+                }
+                else if(xPd >= 500 && yPd >= 350 && xPd < 1000 && yPd < 700) {
+                    button.setText("Low Right");
+                }
+                else if(xPd < 500 && yPd < 350 && xPd >= 0 && yPd >= 0){
+                    button.setText("Top Left");
+                }
+                else {
+                    button.setText("OutOfBounds!");
+                }
+            }
+        });
+        add(button);
+        add(firstPanel);
+        add(secondPanel);
+        add(thirdPanel);
+        add(fourthPanel);
+
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+    public static void main(String[] args) {
+        new PanelButtonMovement();
+    }
+}
