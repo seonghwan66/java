@@ -403,4 +403,113 @@ public class MyFrame extends JFrame {
 }
 
 
----------------------------------------------실습예제1---------------------------------------------
+---------------------------------------------10장 실습예제3---------------------------------------------
+//10장 실습 3
+package slotmachine;
+
+
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+// 소스를 입력하고 Ctrl+Shift+O를 눌러서 필요한 파일을 포함한다. 
+
+class MyCounter extends JFrame implements ActionListener {
+   private JLabel[] labels;
+   private JButton button;
+   private int[] numbers;
+
+   public MyCounter() {
+      setSize(500, 300);
+      JPanel panel = new JPanel();
+      panel.setLayout(null);
+
+      labels = new JLabel[3];
+
+      numbers = new int[3];
+
+      for (int i = 0; i < 3; i++) {
+         labels[i] = new JLabel("" + numbers[i]);
+         labels[i].setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 100));
+         labels[i].setSize(100, 100);
+         labels[i].setLocation(100 + 100 * i, 20);
+         panel.add(labels[i]);
+      }
+
+      button = new JButton("스핀");
+      button.setSize(300, 30);
+      button.setLocation(100, 120);
+      panel.add(button);
+      button.addActionListener(this);
+
+      add(panel);
+      setTitle("My Game");
+
+
+      setVisible(true);
+   }
+
+   @Override
+   public void actionPerformed(ActionEvent event) {
+      for (int i = 0; i < 3; i++) {
+         numbers[i] = (int) (Math.random() * 10);
+         labels[i].setText("" + numbers[i]);
+      }
+   }
+}
+
+public class SlotMachine {
+   public static void main(String[] args) {
+      new MyCounter();
+   }
+}
+
+//16장 실습 1
+class MyRunnable implements Runnable {
+
+  private static final Random random = new Random();
+
+  @Override
+  public void run() {
+    String threadName = Thread.currentThread().getName();
+    System.out.println("- " + threadName + " has been started");
+    int delay = 1000 + random.nextInt(4000); //0~4000
+    try {
+      Thread.sleep(delay);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    System.out.println("- " + threadName + " has been ended (" + delay + "ms)");
+  }
+}
+
+
+public class ThreadRunner {
+  public static void main(String[] args) {
+    // 스레드 객체 생성 
+    Thread thread1 = new MyThread();
+    thread1.setName("Thread #1");
+    Thread thread2 = new MyThread();
+    thread2.setName("Thread #2");
+
+    // 런에이블 객체 생성 
+    Runnable runnable1 = new MyRunnable();
+    Runnable runnable2 = new MyRunnable();
+
+    Thread thread3 = new Thread(runnable1);
+    thread3.setName("Thread #3");
+    Thread thread4 = new Thread(runnable2);
+    thread4.setName("Thread #4");
+
+    // 모든 스레드 시작
+    thread1.start();
+    thread2.start();
+    thread3.start();
+    thread4.start();
+  }
+}
