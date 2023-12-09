@@ -470,46 +470,46 @@ public class SlotMachine {
 }
 
 --------------------------------------------- 16장 실습예제1 ---------------------------------------------
+import java.util.Random;
+
 class MyRunnable implements Runnable {
 
-  private static final Random random = new Random();
+    private static final Random random = new Random();
 
-  @Override
-  public void run() {
-    String threadName = Thread.currentThread().getName();
-    System.out.println("- " + threadName + " has been started");
-    int delay = 1000 + random.nextInt(4000); //0~4000
-    try {
-      Thread.sleep(delay);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
+    @Override
+    public void run() {
+        String threadName = Thread.currentThread().getName();
+        System.out.println("- " + threadName + " has been started");
+        int delay = 1000 + random.nextInt(4000); //0~4000
+        try {
+            Thread.sleep(delay);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("- " + threadName + " has been ended (" + delay + "ms)");
     }
-    System.out.println("- " + threadName + " has been ended (" + delay + "ms)");
-  }
 }
-
-
 public class ThreadRunner {
-  public static void main(String[] args) {
-    // 스레드 객체 생성 
-    Thread thread1 = new MyThread();
-    thread1.setName("Thread #1");
-    Thread thread2 = new MyThread();
-    thread2.setName("Thread #2");
+    public static void main(String[] args) {
+        // 스레드 객체 생성
+        Thread thread1 = new Thread(new MyRunnable());
+        thread1.setName("Thread #1");
+        Thread thread2 = new Thread(new MyRunnable());
+        thread2.setName("Thread #2");
 
-    // 런에이블 객체 생성 
-    Runnable runnable1 = new MyRunnable();
-    Runnable runnable2 = new MyRunnable();
+        // 런에이블 객체 생성
+        Runnable runnable1 = new MyRunnable();
+        Runnable runnable2 = new MyRunnable();
 
-    Thread thread3 = new Thread(runnable1);
-    thread3.setName("Thread #3");
-    Thread thread4 = new Thread(runnable2);
-    thread4.setName("Thread #4");
+        Thread thread3 = new Thread(runnable1);
+        thread3.setName("Thread #3");
+        Thread thread4 = new Thread(runnable2);
+        thread4.setName("Thread #4");
 
-    // 모든 스레드 시작
-    thread1.start();
-    thread2.start();
-    thread3.start();
-    thread4.start();
-  }
+        // 모든 스레드 시작
+        thread1.start();
+        thread2.start();
+        thread3.start();
+        thread4.start();
+    }
 }
