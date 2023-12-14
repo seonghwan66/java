@@ -595,6 +595,45 @@ public class ButtonCountDown {
     }
 }
 --------------------------------------------- 16장 실습예제4 ---------------------------------------------
+public class ThreadJoin {
+    static long startTime = 0;
+    public static void main(String[] args) {
+        startTime = System.currentTimeMillis();
+
+        A th1 = new A();
+        B th2 = new B();
+
+        th1.start();
+        try {
+            th1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        th2.start();
+        try {
+            th2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        long endTime = System.currentTimeMillis();
+        System.out.println("\n소요 시간: " + (endTime - startTime) + "ms");
+    }
+}
+class A extends Thread {
+    public void run() {
+        for (int i = 0; i < 100; i++) {
+            System.out.print("-");
+        }
+    }
+}
+class B extends Thread {
+    public void run() {
+        for (int i = 0; i < 100; i++) {
+            System.out.print("|");
+        }
+    }
+}
+--------------------------------------------- 16장 실습예제4 ---------------------------------------------
 class CreateThread implements Runnable {
     Money myMoney = new Money();
     public void run(){
