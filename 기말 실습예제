@@ -418,31 +418,27 @@ public class AverageCalculator extends JFrame {
     private JLabel[] lbResult; // 총합과 평균을 표시할 레이블
     // AverageCalculator 생성자
     public AverageCalculator() {
+        lbResult = new JLabel[6]; // 국어, 영어, 수학, 체육, 총합, 평균
+        textField = new JTextField[4]; // 국어, 영어, 수학, 체육
 
-        lbResult = new JLabel[6];
-        textField = new JTextField[4];
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 닫기 버튼 동작 설정
         setBounds(100, 100, 700, 500); // 프레임 크기 및 위치 설정
         contentPane = new JPanel(); // 새로운 패널 생성
         setContentPane(contentPane); // 프레임에 패널 설정
         contentPane.setLayout(null); // 배치 관리자를 사용하지 않도록 설정
 
-        // 첫 번째 레이블 설정
+        // 국어 점수 레이블 설정
         lbResult[0] = new JLabel("나의 국어 점수 : ");
         lbResult[0].setBounds(25, 25, 100, 20);
         contentPane.add(lbResult[0]);
-
-        // 두 번째 레이블 설정
+        // 영어 점수 레이블 설정
         lbResult[1] = new JLabel("나의 영어 점수 : ");
         lbResult[1].setBounds(25, 50, 100, 20);
         contentPane.add(lbResult[1]);
-
-        // 세 번째 레이블 설정
+        // 수학 점수 레이블 설정
         lbResult[2] = new JLabel("나의 수학 점수 : ");
         lbResult[2].setBounds(25, 75, 100, 20);
         contentPane.add(lbResult[2]);
-
+        // 체육 점수 레이블 설정
         lbResult[3] = new JLabel("나의 체육 점수 : ");
         lbResult[3].setBounds(25, 100, 100, 20);
         contentPane.add(lbResult[3]);
@@ -451,22 +447,18 @@ public class AverageCalculator extends JFrame {
         textField[0] = new JTextField();
         textField[0].setBounds(140, 25, 100, 20);
         contentPane.add(textField[0]);
-        textField[0].setColumns(10);
         // 영어 점수를 입력받을 텍스트 필드 설정
         textField[1] = new JTextField();
         textField[1].setBounds(140, 50, 100, 20);
         contentPane.add(textField[1]);
-        textField[1].setColumns(10);
         // 수학 점수를 입력받을 텍스트 필드 설정
         textField[2] = new JTextField();
         textField[2].setBounds(140, 75, 100, 20);
         contentPane.add(textField[2]);
-        textField[2].setColumns(10);
         // 체육 점수를 입력받을 텍스트 필드 설정
         textField[3] = new JTextField();
         textField[3].setBounds(140, 100, 100, 20);
         contentPane.add(textField[3]);
-        textField[3].setColumns(10);
 
         // 총합 결과를 표시할 레이블 설정
         lbResult[4] = new JLabel("총합 : ");
