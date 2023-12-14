@@ -402,7 +402,6 @@ public class MyFrame extends JFrame {
     }
 }
 --------------------------------------------- 10장 실습예제2 ---------------------------------------------
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -413,9 +412,11 @@ import javax.swing.JButton;
 
 // AverageCalculator 클래스 정의 (JFrame을 상속받는 사용자 정의 프레임)
 public class AverageCalculator extends JFrame {
+
     private JPanel contentPane; // 프레임의 컨텐츠 영역을 담을 패널
     private JTextField[] textField; // 국어, 영어, 수학, 체육 점수를 입력받을 텍스트 필드
     private JLabel[] lbResult; // 총합과 평균을 표시할 레이블
+
     // AverageCalculator 생성자
     public AverageCalculator() {
         lbResult = new JLabel[6]; // 국어, 영어, 수학, 체육, 총합, 평균
@@ -484,6 +485,7 @@ public class AverageCalculator extends JFrame {
                 lbResult[4].setText("총합 : " + sum); // 총합 결과를 레이블에 표시
             }
         });
+
         // 평균 확인하기 버튼 설정
         JButton averageButton = new JButton("평균 확인하기");
         averageButton.setBounds(350, 80, 140, 25);
