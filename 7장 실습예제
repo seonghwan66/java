@@ -403,6 +403,8 @@ public class MyFrame extends JFrame {
 }
 --------------------------------------------- 10장 실습예제2 ---------------------------------------------
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -415,20 +417,6 @@ public class AverageCalculator extends JFrame {
     private JPanel contentPane; // 프레임의 컨텐츠 영역을 담을 패널
     private JTextField[] textField; // 국어, 영어, 수학, 체육 점수를 입력받을 텍스트 필드
     private JLabel[] lbResult; // 총합과 평균을 표시할 레이블
-
-    // main 메서드
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    AverageCalculator averageCalculator = new AverageCalculator(); // AverageCalculator 객체 생성
-                    averageCalculator.setVisible(true); // 프레임을 화면에 표시
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
     // AverageCalculator 생성자
     public AverageCalculator() {
 
@@ -491,30 +479,41 @@ public class AverageCalculator extends JFrame {
         contentPane.add(lbResult[5]);
 
         // 총합 확인하기 버튼 설정
-        JButton btnNewButton = new JButton("총합 확인하기");
-        btnNewButton.setBounds(350, 40, 140, 25);
-        contentPane.add(btnNewButton);
+        JButton sumButton = new JButton("총합 확인하기");
+        sumButton.setBounds(350, 40, 140, 25);
+        contentPane.add(sumButton);
+        // 총합 클릭 시 이벤트 처리
+        sumButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double sum = 0;
+                for (int i = 0; i < 4; i++) {
+                    sum += Double.parseDouble(textField[i].getText()); // 점수를 입력받아 double로 변환
+                }
+                lbResult[4].setText("총합 : " + sum); // 총합 결과를 레이블에 표시
+            }
+        });
         // 평균 확인하기 버튼 설정
-        JButton btnNewButton1 = new JButton("평균 확인하기");
-        btnNewButton1.setBounds(350, 80, 140, 25);
-        contentPane.add(btnNewButton1);
-
-        // 버튼 클릭 시 이벤트 처리
-        btnNewButton.addActionListener(e -> {
-            double sum = 0;
-            for(int i = 0; i < 4; i++){
-                sum += Double.parseDouble(textField[i].getText()); // 점수를 입력받아 double로 변환
+        JButton averageButton = new JButton("평균 확인하기");
+        averageButton.setBounds(350, 80, 140, 25);
+        contentPane.add(averageButton);
+        // 평균 클릭 시 이벤트 처리
+        averageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double sum = 0;
+                for (int i = 0; i < 4; i++) {
+                    sum += Double.parseDouble(textField[i].getText()); // 점수를 입력받아 double로 변환
+                }
+                double average = sum / 4 + sum % 4;
+                lbResult[5].setText("평균 : " + average); // 평균 결과를 레이블에 표시
             }
-            lbResult[4].setText("총합 : " + sum); // 총합 결과를 레이블에 표시
         });
-        btnNewButton1.addActionListener(e -> {
-            double sum = 0;
-            for(int i = 0; i < 4; i++){
-                sum += Double.parseDouble(textField[i].getText()); // 점수를 입력받아 double로 변환
-            }
-            double average = sum/4 + sum%4;
-            lbResult[5].setText("평균 : " + average); // 평균 결과를 레이블에 표시
-        });
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+    public static void main(String[] args) {
+        new AverageCalculator();
     }
 }
 --------------------------------------------- 10장 실습예제4 ---------------------------------------------
