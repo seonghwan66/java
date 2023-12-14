@@ -594,7 +594,7 @@ public class ButtonCountDown {
         new ButtonCount(); // ButtonCount 객체 생성하여 카운트 다운 시작
     }
 }
---------------------------------------------- 16장 실습예제4 ---------------------------------------------
+--------------------------------------------- 16장 실습예제3 ---------------------------------------------
 public class ThreadJoin {
     static long startTime = 0;
     public static void main(String[] args) {
