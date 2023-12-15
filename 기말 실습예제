@@ -718,13 +718,13 @@ class NumberThread extends Thread {
         System.out.println("Thread Name: " + threadName + ", State: " + state + ", Number: " + number);
     }
 }
-class ButtonCount extends JFrame implements ActionListener {
+public class ButtonCountDown extends JFrame {
     private JLabel[] labels; // 레이블 배열
     private JButton button; // 버튼 객체
     private NumberThread thread; // 스레드 객체
     private int[] numbers; // 숫자 배열
-
-    public ButtonCount() {
+    public ButtonCountDown() {
+        setTitle("카운트 다운"); // 프레임 제목 설정
         setSize(500, 300); // 프레임 크기 설정
         JPanel panel = new JPanel(); // 패널 생성
         panel.setLayout(null); // 배치 관리자 설정
@@ -744,34 +744,31 @@ class ButtonCount extends JFrame implements ActionListener {
         button.setSize(300, 30); // 크기 설정
         button.setLocation(100, 120); // 위치 설정
         panel.add(button); // 패널에 버튼 추가
-        button.addActionListener(this); // 버튼에 ActionListener 등록
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // "스레드 생성" 버튼이 클릭되었을 때 호출되는 메서드
+                thread = new NumberThread(); // 새로운 스레드 생성
+                thread.start(); // 스레드 시작
 
+                // 첫 번째 숫자를 랜덤으로 설정
+                numbers[0] = (int) (Math.random() * 10);
+                labels[0].setText("" + numbers[0]);
+
+                // 두 번째 숫자는 생성된 스레드의 숫자를 반환
+                numbers[1] = thread.getNumber();
+                labels[1].setText("" + numbers[1]);
+                // 세 번째 숫자를 랜덤으로 설정
+                numbers[2] = (int) (Math.random() * 10);
+                labels[2].setText("" + numbers[2]);
+            } // 버튼에 ActionListener 등록
+        });
         add(panel); // 프레임에 패널 추가
-        setTitle("카운트 다운"); // 프레임 제목 설정
         setVisible(true); // 프레임을 화면에 표시
+        setDefaultCloseOperation(EXIT_ON_CLOSE); // 윈도우 창 닫음과 동시에 스레드 죽임.
     }
-    @Override
-    public void actionPerformed(ActionEvent event) {
-        // "스레드 생성" 버튼이 클릭되었을 때 호출되는 메서드
-        thread = new NumberThread(); // 새로운 스레드 생성
-        thread.start(); // 스레드 시작
-
-        // 첫 번째 숫자를 랜덤으로 설정
-        numbers[0] = (int) (Math.random() * 10);
-        labels[0].setText("" + numbers[0]);
-
-        // 두 번째 숫자는 생성된 스레드의 숫자를 반환
-        numbers[1] = thread.getNumber();
-        labels[1].setText("" + numbers[1]);
-
-        // 세 번째 숫자를 랜덤으로 설정
-        numbers[2] = (int) (Math.random() * 10);
-        labels[2].setText("" + numbers[2]);
-    }
-}
-public class ButtonCountDown {
     public static void main(String[] args) {
-        new ButtonCount(); // ButtonCount 객체 생성하여 카운트 다운 시작
+        new ButtonCountDown(); // ButtonCountDown 객체 생성하여 카운트 다운 시작
     }
 }
 --------------------------------------------- 16장 실습예제3 ---------------------------------------------
